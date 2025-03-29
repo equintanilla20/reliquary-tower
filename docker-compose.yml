@@ -6,9 +6,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - 5432:5432
+      - 8888:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/eqdev_data
       - ./db_init_scripts:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -24,6 +24,9 @@ services:
     ports:
       - "8080:8080" # Adjust the port as needed for your Spring Boot app
     depends_on:
+      postgres-db:
+        condition: service_healthy
+    networks:
       - postgres-db
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/eqdev-db
