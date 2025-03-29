@@ -1,7 +1,3 @@
-type Query {
-    bookById(id: ID): Book
-}
-
 type Book {
     id: ID
     name: String
@@ -13,4 +9,8 @@ type Author {
     id: ID
     firstName: String
     lastName: String
+}
+
+type Query {
+    bookById(id: ID): Book
 }

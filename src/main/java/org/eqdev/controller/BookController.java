@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 @Controller
 public class BookController {
 
-        private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 
     @QueryMapping
     public Book bookById(@Argument String id) {
