@@ -32,6 +32,10 @@ public class Card {
     }
 
     // GETTERS
+    public static Card getByCardId(Integer cardId) {
+        // This method should be implemented to retrieve a Card by its ID from the database
+        return null; // Placeholder return statement
+    }
     public Integer geCardId() { return cardId; }
     public String  getCardName() { return cardName; }
     public String  getCardRarity() { return cardRarity; }

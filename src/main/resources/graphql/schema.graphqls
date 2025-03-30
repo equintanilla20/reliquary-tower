@@ -11,18 +11,18 @@ type Author {
     lastName: String!
 }
 
-# type Card {
-#     cardID: ID!
-#     cardName: String!
-#     cardType: String!
-#     cardRarity: String!
-#     cardSet: String!
-#     cardText: String!
-#     cardImageUrl: String!
-# }
+type Card {
+    cardID: ID!
+    cardName: String!
+    cardType: String!
+    cardRarity: String!
+    cardSet: String!
+    cardText: String!
+    cardImageUrl: String!
+}
 
 type Query {
     bookById(id: ID): Book
-    # allCards: [Card]!
-    # cardById(id: ID): Card
+    allCards(): [Card]!
+    cardById(id: ID): Card
 }
