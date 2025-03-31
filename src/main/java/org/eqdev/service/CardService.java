@@ -1,4 +1,4 @@
-package org.eqdev.card;
+package org.eqdev.service;
 
 public class CardService {
     

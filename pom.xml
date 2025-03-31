@@ -56,23 +56,38 @@
         <dependency>
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-spring-boot-starter</artifactId>
-            <version>15.0.0</version>
+            <version>15.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>graphql-java-tools</artifactId>
+                    <groupId>com.graphql-java-kickstart</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>graphql-java-extended-scalars</artifactId>
+                    <groupId>com.graphql-java</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>graphql-java-annotations</artifactId>
+                    <groupId>io.github.graphql-java</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.graphql-java</groupId>
+            <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-java-tools</artifactId>
-            <version>5.2.4</version>
+            <version>14.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java-extended-scalars</artifactId>
             <version>21.0</version>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
             <version>3.1.0</version>
-        </dependency>
+        </dependency> -->
+        
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -116,4 +131,28 @@
         </plugins>
     </build>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.checkerframework</groupId>
+                <artifactId>checker-qual</artifactId>
+                <version>2.5.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java-extended-scalars</artifactId>
+                <version>22.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-runtime</artifactId>
+                <version>4.9.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>23.0.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
