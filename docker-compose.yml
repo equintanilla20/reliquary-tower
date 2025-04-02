@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - 8888:5432
+      - 5432:5432
     volumes:
       - postgres_data:/var/lib/postgresql/eqdev_data
       - ./db_init_scripts:/docker-entrypoint-initdb.d
@@ -17,9 +17,9 @@ services:
       retries: 5
     networks:
       - postgres-db
-  springboot-app:
+  server:
     build:
-      context: .
+      context: ./server
       dockerfile: Dockerfile
     ports:
       - "8080:8080" # Adjust the port as needed for your Spring Boot app

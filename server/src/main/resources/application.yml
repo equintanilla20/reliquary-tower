@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: server
+  graphql:
+    graphiql:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://postgres-db:5432/eqdev-db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  servlet:
+    mapping: /apis/graphql
+
+logging:
+  file:
+    name: logs/spring-boot-dev.log
+  level:
+    graphql:
+      parser: DEBUG
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

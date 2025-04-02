@@ -1,0 +1,22 @@
+scalar Long
+
+type Card {
+    id: ID!
+    cardName: String!
+    cardRarity: String!
+    cardSet: String!
+    cardText: String!
+    cardImageUrl: String!
+}
+
+# Root
+type Query {
+    findAllCards: [Card!]!
+    countCards: Long!
+}
+
+# Root
+type Mutation {
+    createCard(cardName: String!, cardRarity: String!, cardSet: String!, cardText: String!, cardImageUrl: String!): Card!
+    deleteCard(id: ID!): Boolean!
+}
