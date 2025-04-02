@@ -1,6 +1,6 @@
 spring:
   application:
-    name: mtg-archive-server
+    name: server
   graphql:
     graphiql:
       enabled: true
