@@ -28,6 +28,7 @@ server/.idea/libraries/
 server/*.iws
 server/*.iml
 server/*.ipr
+server/HELP.md
 
 ### Eclipse ###
 .apt_generated

@@ -4,7 +4,7 @@ import org.eqdev.model.Card;
 import org.eqdev.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.tools.graphql.GraphQLQueryResolver;
+import org.springframework.graphql.resolvers.query.GraphQLQueryResolver;
 import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLScalarType;
 
