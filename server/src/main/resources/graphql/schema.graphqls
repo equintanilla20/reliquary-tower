@@ -1,22 +1,16 @@
-scalar Long
-
-type Card {
-    id: ID!
-    cardName: String!
-    cardRarity: String!
-    cardSet: String!
-    cardText: String!
-    cardImageUrl: String!
-}
-
-# Root
 type Query {
-    findAllCards: [Card!]!
-    countCards: Long!
+    bookById(id: ID): Book
 }
 
-# Root
-type Mutation {
-    createCard(cardName: String!, cardRarity: String!, cardSet: String!, cardText: String!, cardImageUrl: String!): Card!
-    deleteCard(id: ID!): Boolean!
+type Book {
+    id: ID
+    name: String
+    pageCount: Int
+    author: Author
+}
+
+type Author {
+    id: ID
+    firstName: String
+    lastName: String
 }

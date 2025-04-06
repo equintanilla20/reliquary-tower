@@ -9,7 +9,7 @@ spring:
   graphql:
     graphiql:
       enabled: true
-    path: /graphql
+    path: /apis/graphql
   jpa:
     properties:
       hibernate:
