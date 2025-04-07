@@ -1,29 +1,32 @@
 spring:
   application:
     name: server
-  graphql:
-    graphiql:
-      enabled: true
   datasource:
-    url: jdbc:postgresql://postgres-db:5432/eqdev-db
+    url: jdbc:postgresql://postgres-db:5432/reliquary-tower-db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+  graphql:
+    graphiql:
+      enabled: true
+    path: /apis/graphql
   jpa:
     properties:
       hibernate:
         jdbc:
           lob:
-            non_contextual_creation: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+            '[non_contextual_creation]': true
     hibernate:
-      ddl-auto: update
-  servlet:
-    mapping: /apis/graphql
-
+      ddl-auto: create
+    show-sql: true
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info,metrics
 logging:
   file:
-    name: logs/spring-boot-dev.log
+    name: ./logs/spring-boot-dev.log
   level:
     graphql:
       parser: DEBUG

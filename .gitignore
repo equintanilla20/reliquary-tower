@@ -4,6 +4,12 @@ target/
 !**/src/test/**/target/
 logs/
 
+server/target/
+server/!.mvn/wrapper/maven-wrapper.jar
+server/!**/src/main/**/target/
+server/!**/src/test/**/target/
+server/logs/
+
 ### IntelliJ IDEA ###
 .idea/
 .idea/modules.xml
@@ -14,6 +20,16 @@ logs/
 *.iml
 *.ipr
 
+server/.idea/
+server/.idea/modules.xml
+server/.idea/jarRepositories.xml
+server/.idea/compiler.xml
+server/.idea/libraries/
+server/*.iws
+server/*.iml
+server/*.ipr
+server/HELP.md
+
 ### Eclipse ###
 .apt_generated
 .classpath
@@ -22,6 +38,14 @@ logs/
 .settings
 .springBeans
 .sts4-cache
+
+server/.apt_generated
+server/.classpath
+server/.factorypath
+server/.project
+server/.settings
+server/.springBeans
+server/.sts4-cache
 
 ### NetBeans ###
 /nbproject/private/
@@ -33,8 +57,21 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+server/nbproject/private/
+servernbbuild/
+server/dist/
+server/nbdist/
+server/.nb-gradle/
+server/build/
+server/!**/src/main/**/build/
+server/!**/src/test/**/build/
+
 ### VS Code ###
 .vscode/
 
+server/.vscode/
+
 ### Mac OS ###
 .DS_Store
+
+server/.DS_Store

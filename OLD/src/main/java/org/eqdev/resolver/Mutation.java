@@ -1,11 +1,10 @@
-package org.eqdev.resolver;
+package org.eqdev.server.resolver;
 
 import org.eqdev.model.Card;
 import org.eqdev.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import graphql.kickstart.tools.GraphQLMutationResolver;
+import org.springframework.tools.graphql.GraphQLMutationResolver;
 
 @Component
 public class Mutation implements GraphQLMutationResolver {

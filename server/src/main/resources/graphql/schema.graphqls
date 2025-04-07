@@ -1,0 +1,32 @@
+
+type Book {
+    id: ID
+    name: String
+    pageCount: Int
+    author: Author
+}
+
+type Author {
+    id: ID
+    firstName: String
+    lastName: String
+}
+
+type Card {
+    id: ID!
+    cardName: String!
+    cardRarity: String!
+    cardSet: String!
+    cardText: String!
+    cardImageUrl: String!
+}
+
+type Query {
+    getCardById(id: ID!): Card!
+    getAllCards: [Card!]!
+    bookById(id: ID): Book
+}
+
+type Mutation {
+    addCard(cardName: String!, cardRarity: String!, cardSet: String!, cardText: String!, cardImageUrl: String!): Card!
+}
