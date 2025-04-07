@@ -29,7 +29,7 @@ public class Card {
     @Column(name = "card_set")
     private String cardSet;
 
-    @Column(name = "card_text")
+    @Column(name = "card_text", length = 1024)
     private String cardText;
 
     @Column(name = "card_image_url")

@@ -28,6 +28,8 @@ logging:
   file:
     name: ./logs/spring-boot-dev.log
   level:
+    org:
+      eqdev: DEBUG
     graphql:
       parser: DEBUG
   pattern:
