@@ -17,6 +17,9 @@ public class CardController {
         this.cardRepository = cardRepository;
     }
 
+    /*  
+     * QUERYS
+     */
     @QueryMapping
     public List<Card> getAllCards() {
         return cardRepository.findAll();
@@ -27,6 +30,14 @@ public class CardController {
         return cardRepository.findById(id).orElse(null);
     }
 
+    @QueryMapping
+    public List<Card> getCardsBySet(String set) {
+        return cardRepository.findByCardSet(set);
+    }
+
+    /*  
+     * MUTATIONS
+     */
     @MutationMapping
     public Card addCard(
             @Argument String cardName, 
@@ -42,10 +53,5 @@ public class CardController {
         card.setCardImageUrl(cardImageUrl);
         return cardRepository.save(card);
     }
-
-    // @QueryMapping
-    // public List<Card> getCardsBySet(String set) {
-    //     return cardRepository.findByCardSet(set);
-    // }
 
 }

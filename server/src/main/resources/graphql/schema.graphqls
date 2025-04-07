@@ -23,6 +23,7 @@ type Card {
 
 type Query {
     getCardById(id: ID!): Card!
+    getCardsBySet(cardSet: String!): [Card!]!
     getAllCards: [Card!]!
     bookById(id: ID): Book
 }
