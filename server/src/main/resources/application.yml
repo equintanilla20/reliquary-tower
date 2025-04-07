@@ -2,7 +2,7 @@ spring:
   application:
     name: server
   datasource:
-    url: jdbc:postgresql://postgres-db:5432/eqdev-db
+    url: jdbc:postgresql://postgres-db:5432/reliquary-tower-db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -16,9 +16,9 @@ spring:
         jdbc:
           lob:
             '[non_contextual_creation]': true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+    show-sql: true
 management:
     endpoints:
         web:

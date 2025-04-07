@@ -2,13 +2,13 @@ services:
   postgres-db:
     image: postgres:15-alpine
     environment:
-      POSTGRES_DB: eqdev-db
+      POSTGRES_DB: reliquary-tower-db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - 5432:5432
+      - 8888:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/eqdev_data
+      - postgres_data:/var/lib/postgresql/reliquary-tower_data
       - ./db_init_scripts:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -29,7 +29,8 @@ services:
     networks:
       - postgres-db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/eqdev-db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/reliquary-tower-db
+      SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.postgresql.Driver
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
     volumes:
