@@ -1,11 +1,20 @@
-# Spring Boot App
+# Reliquary Tower
 
-### TODO:
-1. ~~Refine project structure~~
-2. ~~Add GraphQL features~~
-3. ~~Integrate Postgres DB~~
-4. ~~Containerize w/ Docker~~
-5. Add logging from container
-6. Add data for db
-7. Add UI
-8. Automate testing
+This web application is a personal project for storing and managing a Magic: The Gathering card collection.
+
+Users will be able to access their collection online with several tools for organization and deck building.
+
+### Built with the following technologies
+**Frontend**:
+- Next.JS
+- Tailwind CSS
+
+**Backend**:
+- Java 21
+- Spring Boot
+- GraphQL
+- PostgreSQL
+
+**CI/CD**:
+- Docker
+- GitHub Actions
