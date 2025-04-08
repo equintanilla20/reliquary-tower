@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
-
 @Entity
 @Table(name = "card")
 public class Card {
@@ -20,7 +19,7 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "card_name")
+    @Column(name = "card_name", unique = true)
     private String cardName;
 
     @Column(name = "card_rarity")
