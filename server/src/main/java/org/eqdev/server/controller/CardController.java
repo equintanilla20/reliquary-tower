@@ -55,18 +55,42 @@ public class CardController {
      */
     @MutationMapping
     public Card addCard(
-            @Argument String cardName, 
-            @Argument String cardRarity, 
-            @Argument String cardSet, 
-            @Argument String cardText, 
-            @Argument String cardImageUrl) {
-        log.info("Adding new card: {} (Rarity: {}, Set: {})", cardName, cardRarity, cardSet);
-        Card card = new Card();
-        card.setCardName(cardName);
-        card.setCardRarity(cardRarity);
-        card.setCardSet(cardSet);
-        card.setCardText(cardText);
-        card.setCardImageUrl(cardImageUrl);
-        return cardRepository.save(card);
+            @Argument String cardName,
+            @Argument String cardRarity,
+            @Argument String cardType,
+            @Argument Double cmc,
+            @Argument String cardColors,
+            @Argument String cardColorIdentity,
+            @Argument String cardSet,
+            @Argument String cardSetName,
+            @Argument String cardText,
+            @Argument String cardArtist,
+            @Argument String cardImageUrlSmall,
+            @Argument String cardImageUrlNormal,
+            @Argument String cardImageUrlLarge,
+            @Argument String cardImageUrlPng,
+            @Argument String cardImageUrlArtCrop,
+            @Argument String cardImageUrlBorderCrop
+    ) {
+        log.info("Adding new card: {}", cardName);
+        Card newCard = new Card(
+                cardName,
+                cardRarity,
+                cardType,
+                cmc,
+                cardColors,
+                cardColorIdentity,
+                cardSet,
+                cardSetName,
+                cardText,
+                cardArtist,
+                cardImageUrlSmall,
+                cardImageUrlNormal,
+                cardImageUrlLarge,
+                cardImageUrlPng,
+                cardImageUrlArtCrop,
+                cardImageUrlBorderCrop
+        );
+        return cardRepository.save(newCard);
     }
 }

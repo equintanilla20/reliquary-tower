@@ -17,8 +17,8 @@ type Card {
     cardName: String!
     cardRarity: String!
     cardSet: String!
+    cardSetName: String!
     cardText: String!
-    cardImageUrl: String!
 }
 
 type Query {
@@ -29,5 +29,5 @@ type Query {
 }
 
 type Mutation {
-    addCard(cardName: String!, cardRarity: String!, cardSet: String!, cardText: String!, cardImageUrl: String!): Card!
+    addCard(cardName: String!, cardRarity: String!, cardSet: String!, cardSetName: String!, cardText: String!): Card!
 }
