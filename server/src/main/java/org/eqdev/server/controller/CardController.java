@@ -25,12 +25,6 @@ public class CardController {
      * QUERYS
      */
     @QueryMapping
-    public List<Card> getAllCards() {
-        log.info("Fetching all cards from the database.");
-        return cardRepository.findAll();
-    }
-
-    @QueryMapping
     public Card getCardById(@Argument Long id) {
         log.info("Fetching card with ID: {}", id);
         if (id == null) {
@@ -41,6 +35,22 @@ public class CardController {
     }
 
     @QueryMapping
+    public List<Card> getCardByName(@Argument String cardName) {
+        log.info("Fetching card by name: {}", cardName);
+        if (cardName == null || cardName.isEmpty()) {
+            log.warn("Card name is null or empty.");
+            return null;
+        }
+        return cardRepository.findByCardName(cardName);
+    }
+
+    @QueryMapping
+    public List<Card> getAllCards() {
+        log.info("Fetching all cards from the database.");
+        return cardRepository.findAll();
+    }
+
+    @QueryMapping
     public List<Card> getCardsBySet(@Argument String cardSet) {
         log.info("Fetching cards from set: {}", cardSet);
         if (cardSet == null || cardSet.isEmpty()) {
@@ -48,6 +58,26 @@ public class CardController {
             return List.of();
         }
         return cardRepository.findByCardSet(cardSet);
+    }
+
+    @QueryMapping
+    public List<Card> getCardsByRarity(@Argument String cardRarity) {
+        log.info("Fetching cards by rarity: {}", cardRarity);
+        if (cardRarity == null || cardRarity.isEmpty()) {
+            log.warn("Card rarity is null or empty.");
+            return List.of();
+        }
+        return cardRepository.findByCardRarity(cardRarity);
+    }
+
+    @QueryMapping
+    public List<Card> getCardsByRarityAndSet(@Argument String cardRarity, @Argument String cardSet) {
+        log.info("Fetching cards by rarity: {} and set: {}", cardRarity, cardSet);
+        if (cardRarity == null || cardRarity.isEmpty() || cardSet == null || cardSet.isEmpty()) {
+            log.warn("Card rarity or set is null or empty.");
+            return List.of();
+        }
+        return cardRepository.findByCardRarityAndCardSet(cardRarity, cardSet);
     }
 
     /* 

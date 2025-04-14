@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CardRepository extends JpaRepository<Card, Long> {
 
-    List<Card> findByCardSet(String set);
-    // This interface will automatically provide CRUD operations for the Card entity.
-    // You can add custom query methods here if needed.
+    List<Card> findByCardName(String cardName);
+    List<Card> findByCardSet(String cardSet);
+    List<Card> findByCardRarity(String cardRarity);
+    List<Card> findByCardRarityAndCardSet(String cardRarity, String cardSet);
+
 }

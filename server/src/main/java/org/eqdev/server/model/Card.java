@@ -19,7 +19,7 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "card_name", unique = true)
+    @Column(name = "card_name")
     private String cardName;
 
     @Column(name = "card_rarity")
