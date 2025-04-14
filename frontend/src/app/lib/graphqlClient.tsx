@@ -7,7 +7,12 @@ if (!API_ENDPOINT) {
     throw new Error('NEXT_PUBLIC_GRAPHQL_ENDPOINT is not defined in your environment variables.');
 }
 
-const graphQLClient = new GraphQLClient(API_ENDPOINT);
+const graphQLClient = new GraphQLClient(API_ENDPOINT, {
+    headers: {
+        'Content-Type': 'application/json',
+        // Add any other headers you need here, like authentication tokens
+    },
+});
 
 export async function request<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
     try {
