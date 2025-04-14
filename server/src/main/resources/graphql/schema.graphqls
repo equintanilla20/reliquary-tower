@@ -16,18 +16,33 @@ type Card {
     id: ID!
     cardName: String!
     cardRarity: String!
+    cardType: String!
+    cmc: Float!
+    cardColors: String!
+    cardColorIdentity: String!
     cardSet: String!
+    cardSetName: String!
     cardText: String!
-    cardImageUrl: String!
+    cardArtist: String!
+    cardImageUrlSmall: String!
+    cardImageUrlNormal: String!
+    cardImageUrlLarge: String!
+    cardImageUrlPng: String!
+    cardImageUrlArtCrop: String!
+    cardImageUrlBorderCrop: String!
 }
 
 type Query {
     getCardById(id: ID!): Card!
     getCardsBySet(cardSet: String!): [Card!]!
+    getCardByName(cardName: String!): [Card!]!
+    getCardsByRarity(cardRarity: String!): [Card!]!
+    getCardsByRarityAndSet(cardRarity: String!, cardSet: String!): [Card!]!
     getAllCards: [Card!]!
+
     bookById(id: ID): Book
 }
 
 type Mutation {
-    addCard(cardName: String!, cardRarity: String!, cardSet: String!, cardText: String!, cardImageUrl: String!): Card!
+    addCard(cardName: String!, cardRarity: String!, cardSet: String!, cardSetName: String!, cardText: String!): Card!
 }
