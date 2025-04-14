@@ -7,6 +7,10 @@ spring:
     password: postgres
     driver-class-name: org.postgresql.Driver
   graphql:
+    cors:
+        allowed-origins: "*"
+        allowed-methods: GET, POST, PUT, DELETE, OPTIONS
+        allowed-headers: "*"
     graphiql:
       enabled: true
     path: /apis/graphql

@@ -1,6 +1,6 @@
 export const GET_CARD_BY_NAME = `
-    query {
-        getCardByName($cardName: String!) {
+    query GetCardByName($cardName: String!) {
+        getCardByName(cardName: $cardName) {
             cardName
             cardRarity
             cardType
