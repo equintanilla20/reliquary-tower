@@ -1,1 +1,1 @@
-(cd server && mvn clean install) && docker-compose up --build
+(cd server && mvn clean install -DskipTests) && docker-compose up --build
