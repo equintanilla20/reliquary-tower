@@ -15,7 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     /*
      * This class represents a user stored in a PostgreSQL database.

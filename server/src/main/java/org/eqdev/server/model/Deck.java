@@ -14,7 +14,7 @@ public class Deck {
     @Column(name = "deck_name", unique = true)
     private String deckName;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", insertable = false, updatable = false)
     private Long userId;
 
     // Relationships
@@ -23,7 +23,9 @@ public class Deck {
     @Column(name = "card_id")
     private List<Long> cardIds;
     
-
+    @ManyToOne
+    @JoinColumn(name = "user_id") // Specifies the foreign key column
+    private User user;
 
     // CONSTRUCTORS
     public Deck() {}
