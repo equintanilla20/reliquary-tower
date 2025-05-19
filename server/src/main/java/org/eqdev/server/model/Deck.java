@@ -30,6 +30,7 @@ public class Deck {
     // CONSTRUCTORS
     public Deck() {}
     public Deck(Long id) { this.id = id; }
+    public Deck(Long id) { this.id = id; }
     public Deck(String deckName, List<Long> cardIds) {
         this.deckName = deckName;
         this.cardIds = cardIds;
@@ -39,8 +40,16 @@ public class Deck {
     public Long getId() { return id; }
     public String getDeckName() { return deckName; }
     public List<Long> getCardIds() { return cardIds; }
+    public Long getId() { return id; }
+    public String getDeckName() { return deckName; }
+    public List<Long> getCardIds() { return cardIds; }
 
     // SETTERS
+    public void setId(Long id) { this.id = id; }
+    public void setDeckName(String deckName) { this.deckName = deckName; }
+    public void setCardIds(List<Long> cardIds) { this.cardIds = cardIds; }
+    public void addCardId(Long cardId) { this.cardIds.add(cardId); }
+    public void removeCardId(Long cardId) { this.cardIds.remove(cardId); }
     public void setId(Long id) { this.id = id; }
     public void setDeckName(String deckName) { this.deckName = deckName; }
     public void setCardIds(List<Long> cardIds) { this.cardIds = cardIds; }
