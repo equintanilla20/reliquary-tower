@@ -30,12 +30,10 @@ export default function Home() {
     const [inputValue, setInputValue] = useState("");
     const [cardName, setCardName] = useState("");
     const [cardData, setCardData] = useState<Card[] | null>(null);
-    // const [, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (cardName) {
-            // setLoading(true);
             setError(null);
             setCardData(null);
             request<{ getCardByName: Card[] }>(GET_CARD_BY_NAME, { cardName })
@@ -74,7 +72,6 @@ export default function Home() {
                         Search
                     </button>
                 </form>
-                {/* {loading && <p>Loading...</p>} */}
                 {error && <p>Error: {error}</p>}
                 {cardData && cardData.length > 0 && ( // Check if cardData has elements.
                     <div>
