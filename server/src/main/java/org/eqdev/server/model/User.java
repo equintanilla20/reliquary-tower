@@ -43,9 +43,9 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "user_cards",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "card_id")
+        name = "user_cards",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "card_id")
     )
     private Set<Card> library = new HashSet<>();
 

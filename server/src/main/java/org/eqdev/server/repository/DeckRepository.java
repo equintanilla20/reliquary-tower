@@ -8,6 +8,6 @@ public interface DeckRepository extends JpaRepository<Deck, Long>{
     List<Deck> findByDeckName(String deckName);
     List<Deck> findByCardIdsContains(Long cardId);
     List<Deck> findByCardIdsContainsAndDeckName(Long cardId, String deckName);
-    List<Deck> findByDeckNameUserId(String deckName, Long userId);
-    List<Deck> findByUserID(Long userId);
+    List<Deck> findByDeckNameAndUserId(String deckName, Long userId);
+    List<Deck> findByUserId(Long userId);
 }
