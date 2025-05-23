@@ -29,7 +29,9 @@ export default function Home() {
 
     const [inputValue, setInputValue] = useState("");
     const [cardName, setCardName] = useState("");
+    const [cardText, setCardText] = useState("");
     const [cardData, setCardData] = useState<Card[] | null>(null);
+    const [searchTrigger, setSearchTrigger] = useState(0);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -40,6 +42,11 @@ export default function Home() {
                 .then((data) => {
                     if (data.getCardByName.length > 0) {
                         setCardData(data.getCardByName);
+                        const receivedCardText = data.getCardByName[0].cardText;
+                        console.log('Original card text from API:', receivedCardText);
+                        console.log('Does it contain \\n (literal backslash n)?', receivedCardText.includes('\\n'));
+                        console.log('Does it contain a true newline character?', receivedCardText.includes('\n')); // This checks for the actual newline char
+                        setCardText(data.getCardByName[0].cardText.replace(/\\n/g, '\n\n'));
                     } else {
                         setError("Card not found");
                     }
@@ -50,17 +57,32 @@ export default function Home() {
                 }
             );
         }
-    }, [cardName]);
+    }, [searchTrigger, cardName]);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        setCardName(inputValue.trim());
+        const trimmedInputValue = inputValue.trim();
+
+        // Only proceed if the input value is not empty
+        if (!trimmedInputValue) {
+            setError("Please enter a card name.");
+            setCardData(null); // Clear previous card data if input is empty
+            setCardText("");   // Clear previous card text
+            return;
+        }
+
+        if (trimmedInputValue !== cardName) {
+            setCardName(trimmedInputValue);
+            setSearchTrigger(prev => prev + 1); // Also increment to ensure first fetch on new name
+        }
     }
 
     return (
-        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-                <form onSubmit={handleSearch} className="flex gap-2 mb-4">
+        <div className="flex flex-col items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+            {/* Removed row-start-2 from main, added w-full for centering its children */}
+            <main className="flex flex-col items-center w-full">
+                {/* Centered the form using mx-auto and ensured it doesn't take full width */}
+                <form onSubmit={handleSearch} className="flex gap-2 mb-4 mx-auto">
                     <input
                         type="text"
                         value={inputValue}
@@ -73,19 +95,21 @@ export default function Home() {
                     </button>
                 </form>
                 {error && <p>Error: {error}</p>}
-                {cardData && cardData.length > 0 && ( // Check if cardData has elements.
-                    <div>
-                        <h1>{cardData[0].cardName}</h1>
-                        <Image
-                            src={cardData[0].cardImageUrlPng}
-                            alt={cardData[0].cardName}
-                            width={300}
-                            height={300}
-                        />
-                        <div className="p-4">
-                            <p style={{ whiteSpace: 'pre-wrap' }} >
-                                Text: {cardData[0].cardText.split('\n')}
-                            </p>
+                {cardData && cardData.length > 0 && (
+                    <div className="flex flex-col items-center" > {/* Added flex-col and items-center here */}
+                        <h1 className="font-bold text-3xl" >{cardData[0].cardName}</h1>
+                        <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
+                            <Image
+                                src={cardData[0].cardImageUrlPng}
+                                alt={cardData[0].cardName}
+                                width={300}
+                                height={300}
+                            />
+                            <div className="p-4 max-w-sm"> {/* Added max-w-sm to constrain text width on larger screens */}
+                                <p style={{ whiteSpace: 'pre-wrap' }} >
+                                    {cardText}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 )}
