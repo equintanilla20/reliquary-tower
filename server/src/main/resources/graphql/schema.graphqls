@@ -1,48 +1,64 @@
-
-type Book {
-    id: ID
-    name: String
-    pageCount: Int
-    author: Author
-}
-
-type Author {
-    id: ID
-    firstName: String
-    lastName: String
+# TYPES
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    role: String!
 }
 
 type Card {
-    id: ID!
+    cardId: ID!
     cardName: String!
     cardRarity: String!
     cardType: String!
-    cmc: Float!
+    cmc: Double!
     cardColors: String!
     cardColorIdentity: String!
     cardSet: String!
     cardSetName: String!
-    cardText: String!
-    cardArtist: String!
-    cardImageUrlSmall: String!
-    cardImageUrlNormal: String!
-    cardImageUrlLarge: String!
-    cardImageUrlPng: String!
-    cardImageUrlArtCrop: String!
-    cardImageUrlBorderCrop: String!
+    text: String!
+    artist: String!
+    imageUriSmall: String!
+    imageUriNormal: String!
+    imageUriLarge: String!
+    imageUriPng: String!
+    artCropUri: String!
+    borderCropUri: String!
 }
 
-type Query {
-    getCardById(id: ID!): Card!
-    getCardsBySet(cardSet: String!): [Card!]!
-    getCardByName(cardName: String!): [Card!]!
-    getCardsByRarity(cardRarity: String!): [Card!]!
-    getCardsByRarityAndSet(cardRarity: String!, cardSet: String!): [Card!]!
-    getAllCards: [Card!]!
-
-    bookById(id: ID): Book
+type Deck {
+    deckId: ID!
+    deckName: String!
+    username: String!
+    createdAt: String!
+    cards: [DeckCard!]!
 }
 
-type Mutation {
-    addCard(cardName: String!, cardRarity: String!, cardSet: String!, cardSetName: String!, cardText: String!): Card!
+type DeckCard {
+    cardId: ID!
+    quantity: Int!
+}
+
+# QUERIES
+extend type Query {
+    allUsers: [User!]!
+    allDecks: [Deck!]!
+    allCards(limit: Int, offset: Int): [Card!]!
+    searchCardsByName(name: String!): [Card!]!
+    # searchCardsByRarity(rarity: String!): [Card!]!
+    # searchCardsByType(type: String!): [Card!]!
+    # searchCardsByColor(color: String!): [Card!]!
+    # searchCardsByColorIdentity(colorIdentity: String!): [Card!]!
+    # searchCardsBySet(set: String!): [Card!]!
+    # searchCardsBySetName(setName: String!): [Card!]!
+    userByUsername(username: String!): User
+    userByEmail(email: String!): User
+    deckById(deckId: ID!): Deck
+}
+
+# MUTATIONS
+extend type Mutation {
+    createDeck(deckName: String!, username: String!): Deck!
+    addCardToDeck(deckId: ID!, cardId: ID!, quantity: Int!): Deck!
+    # removeCardFromDeck(deckId: ID!, cardId: ID!): Deck!
 }

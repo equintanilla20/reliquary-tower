@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 logs/
 data/
+old/
 
 server/target/
 server/!.mvn/wrapper/maven-wrapper.jar

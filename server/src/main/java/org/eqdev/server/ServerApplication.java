@@ -2,13 +2,13 @@ package org.eqdev.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "org.eqdev.server.repository")
-public class Server {
+public class ServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Server.class, args);
+        System.out.println("Starting server...");
+		SpringApplication.run(ServerApplication.class, args);
 	}
+
 }

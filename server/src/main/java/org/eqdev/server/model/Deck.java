@@ -1,59 +1,57 @@
 package org.eqdev.server.model;
 
+import java.util.ArrayList;
 import java.util.List;
-import jakarta.persistence.*;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "deck")
+@Table(name = "Deck")
 public class Deck {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long deckId;
 
-    @Column(name = "deck_name", unique = true)
+    @Column(name = "deck_name", nullable = false)
     private String deckName;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "username", nullable = false)
+    private AppUser user;
 
-    // Relationships
-    @ElementCollection
-    @CollectionTable(name = "deck_cards", joinColumns = @JoinColumn(name = "deck_id"))
-    @Column(name = "card_id")
-    private List<Long> cardIds;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_id") // Specifies the foreign key column
-    private User user;
+    @Column(name = "created_at")
+    private String createdAt;
 
-    // CONSTRUCTORS
+    @Column(name = "updated_at")
+    private String updatedAt;
+
+    @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Card> cards = new ArrayList<>();
+
     public Deck() {}
-    public Deck(Long id) { this.id = id; }
-    public Deck(String deckName, List<Long> cardIds) {
-        this.deckName = deckName;
-        this.cardIds = cardIds;
-    }
-    
-    // GETTERS
-    public Long getId() { return id; }
+
+    // Getters
+    public Long getDeckId() { return deckId; }
     public String getDeckName() { return deckName; }
-    public List<Long> getCardIds() { return cardIds; }
+    public AppUser getUser() { return user; }
+    public String getCreatedAt() { return createdAt; }
+    public String getUpdatedAt() { return updatedAt; }
 
-    // SETTERS
-    public void setId(Long id) { this.id = id; }
+    // Setters
+    public void setDeckId(Long deckId) { this.deckId = deckId; }
     public void setDeckName(String deckName) { this.deckName = deckName; }
-    public void setCardIds(List<Long> cardIds) { this.cardIds = cardIds; }
-    public void addCardId(Long cardId) { this.cardIds.add(cardId); }
-    public void removeCardId(Long cardId) { this.cardIds.remove(cardId); }
-    public void setUserId(Long userId) { this.userId = userId; }
-
-    @Override
-    public String toString() {
-        return "Deck{" +
-                "id=" + id +
-                ", deckName='" + deckName + '\'' +
-                ", cardIds=" + cardIds +
-                '}';
-    }
+    public void setUser(AppUser user) { this.user = user; }
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
+    public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
 }
