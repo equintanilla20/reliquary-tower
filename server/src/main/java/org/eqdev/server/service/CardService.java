@@ -18,14 +18,14 @@ public class CardService {
         this.cardRepository = cardRepository;
     }
 
-    public List<Card> getAllCards(int page, int size) {
+    public List<Card> allCards(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("cardName").ascending());
         return cardRepository.findAll(pageable).getContent();
     }
 
-    public List<Card> searchCardsByName(String name, int page, int size) {
+    public List<Card> searchCardsByName(String cardName, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("cardName").ascending());
-        return cardRepository.findByNameContainingIgnoreCase(name, pageable);
+        return cardRepository.findByCardNameContainingIgnoreCase(cardName, pageable);
     }
 
     public Optional<Card> getCardById(Long id) {

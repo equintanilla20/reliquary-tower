@@ -2,24 +2,19 @@ package org.eqdev.server.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "DeckCard")
-public class DeckCard {
-
+public class UserCollection {
     @EmbeddedId
-    private DeckCardId id;
+    private UserCollectionId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("deckId")
-    @JoinColumn(name = "deck_id", nullable = false)
-    private Deck deck;
+    @MapsId("userId")
+    @JoinColumn(name = "user_id", nullable = false)
+    private AppUser user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("cardId")

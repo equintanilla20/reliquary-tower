@@ -8,36 +8,38 @@ services:
     ports:
       - 8888:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/reliquary-tower_data
+      # - postgres_data:/var/lib/postgresql/reliquary-tower_data
+      - postgres_data:/var/lib/postgresql/data
       - ./db_init_scripts:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d reliquary-tower-db"]
       interval: 5s
       timeout: 5s
       retries: 5
     networks:
-      - postgres-db
+      - mtg-network
   server:
     build:
       context: ./server
       dockerfile: Dockerfile
     ports:
-      - "8080:8080" # Adjust the port as needed for your Spring Boot app
+      - "8080:8080"
     depends_on:
       postgres-db:
         condition: service_healthy
     networks:
-      - postgres-db
+      - mtg-network
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/reliquary-tower-db
       SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.postgresql.Driver
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
     volumes:
       - ./server/logs:/app/logs
 volumes:
   postgres_data:
     name: postgres_data
 networks:
-    postgres-db:
+    mtg-network:
         driver: bridge
