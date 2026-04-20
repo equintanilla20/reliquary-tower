@@ -11,7 +11,7 @@ type Card {
     cardName: String!
     cardRarity: String!
     cardType: String!
-    cmc: Double!
+    cmc: Float!
     cardColors: String!
     cardColorIdentity: String!
     cardSet: String!
@@ -31,7 +31,8 @@ type Deck {
     deckName: String!
     username: String!
     createdAt: String!
-    cards: [DeckCard!]!
+    updatedAt: String!
+    cards: [DeckCard]
 }
 
 type DeckCard {
@@ -40,11 +41,11 @@ type DeckCard {
 }
 
 # QUERIES
-extend type Query {
-    allUsers: [User!]!
-    allDecks: [Deck!]!
-    allCards(limit: Int, offset: Int): [Card!]!
-    searchCardsByName(name: String!): [Card!]!
+type Query {
+    allUsers: [User]
+    allDecks: [Deck]
+    allCards(page: Int, size: Int): [Card]
+    searchCardsByName(cardName: String!): [Card]
     # searchCardsByRarity(rarity: String!): [Card!]!
     # searchCardsByType(type: String!): [Card!]!
     # searchCardsByColor(color: String!): [Card!]!
@@ -57,7 +58,7 @@ extend type Query {
 }
 
 # MUTATIONS
-extend type Mutation {
+type Mutation {
     createDeck(deckName: String!, username: String!): Deck!
     addCardToDeck(deckId: ID!, cardId: ID!, quantity: Int!): Deck!
     # removeCardFromDeck(deckId: ID!, cardId: ID!): Deck!

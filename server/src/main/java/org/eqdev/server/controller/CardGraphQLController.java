@@ -18,14 +18,14 @@ public class CardGraphQLController {
     }
 
     @QueryMapping
-    public List<Card> cards(@Argument int page, @Argument int size) {
+    public List<Card> allCards(@Argument int page, @Argument int size) {
         System.out.println("DEBUG ::: Fetching All Cards");
-        return cardService.getAllCards(page, size);
+        return cardService.allCards(page, size);
     }
 
     @QueryMapping
-    public List<Card> searchCards(@Argument String name, @Argument int page, @Argument int size) {
-        return cardService.searchCardsByName(name, page, size);
+    public List<Card> searchCards(@Argument String cardName, @Argument int page, @Argument int size) {
+        return cardService.searchCardsByName(cardName, page, size);
     }
 
     @QueryMapping

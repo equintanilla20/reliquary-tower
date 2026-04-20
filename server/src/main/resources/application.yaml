@@ -1,3 +1,24 @@
 spring:
   application:
     name: server
+  datasource:
+    url: jdbc:postgresql://localhost:8888/reliquary-tower-db
+    username: postgres
+    password: postgres
+    hikari:
+      initialization-fail-timeout: 15000
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        '[format_sql]': false
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
+    schema:
+      introspection:
+        enabled: true

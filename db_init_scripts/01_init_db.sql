@@ -1,5 +1,5 @@
 CREATE TABLE app_user (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     username VARCHAR(32) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE app_user (
 
 -- Basic MTG Card Table
 CREATE TABLE Card(
-    card_id SERIAL PRIMARY KEY,
+    card_id BIGSERIAL PRIMARY KEY,
     card_name TEXT NOT NULL, 
     card_rarity TEXT, 
     card_type TEXT, 
@@ -37,25 +37,25 @@ CREATE INDEX idx_card_set ON Card(card_set);
 
 -- Deck Table
 CREATE TABLE Deck(
-    deck_id SERIAL PRIMARY KEY,
+    deck_id BIGSERIAL PRIMARY KEY,
     deck_name TEXT NOT NULL,
-    username VARCHAR(32) REFERENCES app_user(username),
+    user_id BIGSERIAL REFERENCES app_user(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Join Table for Decks and Cards
 CREATE TABLE Deck_Card(
-    deck_id INT REFERENCES Deck(deck_id) ON DELETE CASCADE,
-    card_id BIGINT REFERENCES Card(card_id),
+    deck_id BIGSERIAL REFERENCES Deck(deck_id) ON DELETE CASCADE,
+    card_id BIGSERIAL REFERENCES Card(card_id),
     quantity INT DEFAULT 1,
     PRIMARY KEY (deck_id, card_id)
 );
 
 -- User Personal Collection Table
 CREATE TABLE User_Collection(
-    username VARCHAR(32) REFERENCES app_user(username),
-    card_id BIGINT REFERENCES Card(card_id),
+    user_id BIGSERIAL REFERENCES app_user(id),
+    card_id BIGSERIAL REFERENCES Card(card_id),
     quantity INT DEFAULT 1,
-    PRIMARY KEY (username, card_id)
+    PRIMARY KEY (user_id, card_id)
 );
