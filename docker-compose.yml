@@ -30,6 +30,7 @@ services:
     networks:
       - mtg-network
     environment:
+      SPRING_PROFILES_ACTIVE: dev
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/reliquary-tower-db
       SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.postgresql.Driver
       SPRING_DATASOURCE_USERNAME: postgres
