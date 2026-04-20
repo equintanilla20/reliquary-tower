@@ -1,13 +1,15 @@
-// package org.eqdev.server;
+package org.eqdev.server;
 
-// import org.junit.jupiter.api.Test;
-// import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-// @SpringBootTest
-// class ServerApplicationTests {
-
-// 	@Test
-// 	void contextLoads() {
-// 	}
-
-// }
+@SpringBootTest
+@ActiveProfiles("test")
+class ServerApplicationTests {
+    
+    @Test
+    void contextLoads() {
+        System.out.println("Context loaded successfully!");
+    }
+}
