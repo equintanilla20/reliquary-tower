@@ -39,8 +39,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./server/Dockerfile
+          context: ./server/
           push: true
-          # Note: This will overwrite 'latest' every time you run a PR
+
           tags: ghcr.io/${{ github.repository }}:latest
