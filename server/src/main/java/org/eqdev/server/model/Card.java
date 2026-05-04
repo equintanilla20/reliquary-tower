@@ -1,5 +1,13 @@
 package org.eqdev.server.model;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,8 +47,15 @@ public class Card {
     @Column(name = "card_set_name")
     private String cardSetName;
 
+    @Column(name = "card_keywords")
+    private String cardKeywords;
+
     @Column(name = "card_text")
     private String text;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private Map<String, String> legalities = new HashMap<>();
 
     @Column(name = "card_artist")
     private String artist;
@@ -73,6 +88,7 @@ public class Card {
                 String cardColorIdentity,
                 String cardSet, 
                 String cardSetName, 
+                String cardKeywords,
                 String text, 
                 String artist, 
                 String imageUriSmall, 
@@ -89,6 +105,7 @@ public class Card {
         this.cardColorIdentity = cardColorIdentity;
         this.cardSet = cardSet;
         this.cardSetName = cardSetName;
+        this.cardKeywords = cardKeywords;
         this.text = text;
         this.artist = artist;
         this.imageUriSmall = imageUriSmall;
@@ -98,6 +115,8 @@ public class Card {
         this.artCropUri = artCropUri;
         this.borderCropUri = borderCropUri;
     }
+
+    public record LegalityEntry(String format, String status) {}
 
     // Getters
     public Long getCardId() { return cardId; }
@@ -110,6 +129,7 @@ public class Card {
     public String getCardSet() { return cardSet; }
     public String getCardSetName() { return cardSetName; }
     public String getText() { return text; }
+    public String getCardKeywords() { return cardKeywords; }
     public String getArtist() { return artist; }
     public String getImageUriSmall() { return imageUriSmall; }
     public String getImageUriNormal() { return imageUriNormal; }
@@ -117,6 +137,12 @@ public class Card {
     public String getImageUriPng() { return imageUriPng; }
     public String getArtCropUri() { return artCropUri; }
     public String getBorderCropUri() { return borderCropUri; }
+    public List<LegalityEntry> getLegalities() {
+        if (this.legalities == null) return Collections.emptyList();
+        return this.legalities.entrySet().stream()
+                .map(entry -> new LegalityEntry(entry.getKey(), entry.getValue()))
+                .toList();
+    }
 
     // Setters
     public void setCardId(Long cardId) { this.cardId = cardId; }
@@ -128,7 +154,9 @@ public class Card {
     public void setCardColorIdentity(String cardColorIdentity) { this.cardColorIdentity = cardColorIdentity; }
     public void setCardSet(String cardSet) { this.cardSet = cardSet; }
     public void setCardSetName(String cardSetName) { this.cardSetName = cardSetName; }
+    public void setCardKeywords(String cardKeywords) { this.cardKeywords = cardKeywords; }
     public void setText(String text) { this.text = text; }
+    public void setLegalities(Map<String, String> legalities) { this.legalities = legalities; }
     public void setArtist(String artist) { this.artist = artist; }
     public void setImageUriSmall(String imageUriSmall) { this.imageUriSmall = imageUriSmall; }
     public void setImageUriNormal(String imageUriNormal) { this.imageUriNormal = imageUriNormal; }

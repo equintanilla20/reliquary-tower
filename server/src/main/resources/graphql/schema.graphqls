@@ -16,7 +16,9 @@ type Card {
     cardColorIdentity: String!
     cardSet: String!
     cardSetName: String!
+    cardKeywords: String!
     text: String!
+    legalities: [LegalityEntry]
     artist: String!
     imageUriSmall: String!
     imageUriNormal: String!
@@ -24,6 +26,11 @@ type Card {
     imageUriPng: String!
     artCropUri: String!
     borderCropUri: String!
+}
+
+type LegalityEntry {
+    format: String
+    status: String
 }
 
 type Deck {

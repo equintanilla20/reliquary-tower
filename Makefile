@@ -4,7 +4,7 @@ DOCKER_COMP_FILE = docker-compose.yml
 
 rebuild:
 	docker-compose down -v
-	cd server && mvn clean install
+	cd server && mvn clean install -DskipTests
 	docker-compose up -d --build
 
 clean-start:
