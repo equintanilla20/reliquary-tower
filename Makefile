@@ -1,11 +1,19 @@
 DOCKER_COMP_FILE = docker-compose.yml
 
-.PHONY: rebuild-all clean-start stop start
+.PHONY: rebuild rebuild-backend test clean-start stop start
 
-rebuild:
+rebuild-all:
 	docker-compose down -v
 	cd server && mvn clean install -DskipTests
 	docker-compose up -d --build
+
+rebuild-backend:
+	docker-compose down
+	cd server && mvn clean install -DskipTests
+	docker-compose up -d --build server
+
+test:
+	cd server && mvn test
 
 clean-start:
 	docker-compose down -v

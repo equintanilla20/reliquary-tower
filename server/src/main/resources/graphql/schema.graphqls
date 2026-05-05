@@ -47,18 +47,32 @@ type DeckCard {
     quantity: Int!
 }
 
+input CardFilter {
+    cardName: String
+    rarity: String
+    cardType: String
+    cardColors: [String]
+    cmc: Float
+    cardSet: String
+    cardKeywords: [String]
+    format: String
+    status: String
+}
+
 # QUERIES
 type Query {
     allUsers: [User]
     allDecks: [Deck]
     allCards(page: Int, size: Int): [Card]
+    searchCards(filter: CardFilter!, page: Int, size: Int): [Card]
     searchCardsByName(cardName: String!): [Card]
-    # searchCardsByRarity(rarity: String!): [Card!]!
-    # searchCardsByType(type: String!): [Card!]!
-    # searchCardsByColor(color: String!): [Card!]!
-    # searchCardsByColorIdentity(colorIdentity: String!): [Card!]!
-    # searchCardsBySet(set: String!): [Card!]!
-    # searchCardsBySetName(setName: String!): [Card!]!
+    cardByCardId(cardId: ID!): Card
+    cardsByRarity(rarity: String!): [Card!]!
+    cardsByType(type: String!): [Card!]!
+    cardsByColor(color: String!): [Card!]!
+    cardsByColorIdentity(colorIdentity: String!): [Card!]!
+    cardsBySet(set: String!): [Card!]!
+    cardsBySetName(setName: String!): [Card!]!
     userByUsername(username: String!): User
     userByEmail(email: String!): User
     deckById(deckId: ID!): Deck
