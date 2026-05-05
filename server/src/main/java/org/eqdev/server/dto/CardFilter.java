@@ -4,12 +4,12 @@ import java.util.List;
 
 public record CardFilter (
     String cardName,
-    String rarity,
-    String type,
+    String cardRarity,
+    String cardType,
     Double cmc,
-    List<String> colors,
-    String set,
-    List<String> keywords,
+    List<String> cardColors,
+    String cardSet,
+    List<String> cardKeywords,
     String format,
     String status
 ) {}

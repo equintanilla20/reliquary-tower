@@ -1,6 +1,6 @@
 DOCKER_COMP_FILE = docker-compose.yml
 
-.PHONY: rebuild rebuild-backend test clean-start stop start
+.PHONY: rebuild-backend test clean-start stop start
 
 rebuild-all:
 	docker-compose down -v

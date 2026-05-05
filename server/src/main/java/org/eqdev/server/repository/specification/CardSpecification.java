@@ -42,7 +42,7 @@ public class CardSpecification {
 
     public static Specification<Card> isLegalIn(String format, String status) {
         return (root, query, criteriaBuilder) -> {
-            if (format == null || status == null) return null;
+            if (format == null || status == null) return criteriaBuilder.conjunction();
             return criteriaBuilder.equal(
                 criteriaBuilder.function("jsonb_extract_path_text", String.class,
                     root.get("legalities"), criteriaBuilder.literal(format)),

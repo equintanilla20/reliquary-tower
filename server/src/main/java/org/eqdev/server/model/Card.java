@@ -51,7 +51,7 @@ public class Card {
     private String cardKeywords;
 
     @Column(name = "card_text")
-    private String text;
+    private String cardText;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
@@ -89,7 +89,7 @@ public class Card {
                 String cardSet, 
                 String cardSetName, 
                 String cardKeywords,
-                String text, 
+                String cardText, 
                 String artist, 
                 String imageUriSmall, 
                 String imageUriNormal,
@@ -106,7 +106,7 @@ public class Card {
         this.cardSet = cardSet;
         this.cardSetName = cardSetName;
         this.cardKeywords = cardKeywords;
-        this.text = text;
+        this.cardText = cardText;
         this.artist = artist;
         this.imageUriSmall = imageUriSmall;
         this.imageUriNormal = imageUriNormal;
@@ -128,7 +128,7 @@ public class Card {
     public String getCardColorIdentity() { return cardColorIdentity; }
     public String getCardSet() { return cardSet; }
     public String getCardSetName() { return cardSetName; }
-    public String getText() { return text; }
+    public String getCardText() { return cardText; }
     public String getCardKeywords() { return cardKeywords; }
     public String getArtist() { return artist; }
     public String getImageUriSmall() { return imageUriSmall; }
@@ -155,7 +155,7 @@ public class Card {
     public void setCardSet(String cardSet) { this.cardSet = cardSet; }
     public void setCardSetName(String cardSetName) { this.cardSetName = cardSetName; }
     public void setCardKeywords(String cardKeywords) { this.cardKeywords = cardKeywords; }
-    public void setText(String text) { this.text = text; }
+    public void setCardText(String cardText) { this.cardText = cardText; }
     public void setLegalities(Map<String, String> legalities) { this.legalities = legalities; }
     public void setArtist(String artist) { this.artist = artist; }
     public void setImageUriSmall(String imageUriSmall) { this.imageUriSmall = imageUriSmall; }

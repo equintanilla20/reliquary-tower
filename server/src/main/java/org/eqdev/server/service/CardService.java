@@ -40,22 +40,22 @@ public class CardService {
             spec = spec.and(CardSpecification.hasCardName(filter.cardName()));
         }
 
-        if (filter.rarity() != null) {
-            spec = spec.and(CardSpecification.hasCardRarity(filter.rarity()));
+        if (filter.cardRarity() != null) {
+            spec = spec.and(CardSpecification.hasCardRarity(filter.cardRarity()));
         }
 
-        if (filter.type() != null) {
-            spec = spec.and(CardSpecification.hasCardType(filter.type()));
+        if (filter.cardType() != null) {
+            spec = spec.and(CardSpecification.hasCardType(filter.cardType()));
         }
 
-        if (filter.colors() != null && !filter.colors().isEmpty()) {
-            for (String color : filter.colors()) {
+        if (filter.cardColors() != null && !filter.cardColors().isEmpty()) {
+            for (String color : filter.cardColors()) {
                 spec = spec.and(CardSpecification.hasCardColors(color));
             }
         }
 
-        if (filter.set() != null) {
-            spec = spec.and(CardSpecification.hasCardSet(filter.set()));
+        if (filter.cardSet() != null) {
+            spec = spec.and(CardSpecification.hasCardSet(filter.cardSet()));
         }
 
         if (filter.format() != null && filter.status() != null) {
@@ -67,20 +67,10 @@ public class CardService {
                 criteriaBuilder.equal(root.get("cmc"), filter.cmc()));
         }
 
-        if (filter.keywords() != null && !filter.keywords().isEmpty()) {
-            for (String keyword : filter.keywords()) {
+        if (filter.cardKeywords() != null && !filter.cardKeywords().isEmpty()) {
+            for (String keyword : filter.cardKeywords()) {
                 spec = spec.and(CardSpecification.hasCardKeywords(keyword));
             }
-        }
-
-        if (filter.status() != null) {
-            spec = spec.and((root, query, criteriaBuilder) -> 
-                criteriaBuilder.equal(
-                    criteriaBuilder.function("jsonb_extract_path_text", String.class,
-                        root.get("legalities"), 
-                    criteriaBuilder.literal(filter.format())),
-                filter.status()
-            ));
         }
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("cardName").ascending());
