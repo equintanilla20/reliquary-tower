@@ -32,9 +32,11 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
+
       - name: Run Unit Tests
         working-directory: ./server
         run: mvn test
+        
       - name: Build with Maven
         working-directory: ./server
         run: mvn clean package -DskipTests
