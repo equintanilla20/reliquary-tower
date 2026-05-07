@@ -40,6 +40,7 @@ type Deck {
     createdAt: String!
     updatedAt: String!
     cards: [DeckCard]
+    notes: String
 }
 
 type DeckCard {
@@ -81,6 +82,9 @@ type Query {
 # MUTATIONS
 type Mutation {
     createDeck(deckName: String!, username: String!): Deck!
-    addCardToDeck(deckId: ID!, cardId: ID!, quantity: Int!): Deck!
+    deleteDeck(deckId: ID!, username: String!): Boolean!
+    updateDeck(deckId: ID!, deckName: String!, username: String!): Deck!
+    addCardToDeck(deckId: ID!, cardId: ID!, quantity: Int!, username: String!): Deck!
+    removeCardFromDeck(deckId: ID!, cardId: ID!, username: String!): Deck!
     # removeCardFromDeck(deckId: ID!, cardId: ID!): Deck!
 }
