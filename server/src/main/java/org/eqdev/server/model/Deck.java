@@ -40,6 +40,8 @@ public class Deck {
     @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DeckCard> cards = new ArrayList<>();
 
+    private String notes;
+
     public Deck() {}
 
     // Getters
@@ -48,6 +50,9 @@ public class Deck {
     public AppUser getUser() { return user; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public String getNotes() { return notes; }
+    public List<DeckCard> getDeckCards() { return cards; }
+
 
     // Setters
     public void setDeckId(Long deckId) { this.deckId = deckId; }
@@ -55,4 +60,6 @@ public class Deck {
     public void setUser(AppUser user) { this.user = user; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+    public void setNotes(String notes) { this.notes = notes; }
+    public void setDeckCards(List<DeckCard> cards) { this.cards = cards; }
 }

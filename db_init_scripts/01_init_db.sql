@@ -42,6 +42,7 @@ CREATE TABLE Deck(
     deck_id BIGSERIAL PRIMARY KEY,
     deck_name TEXT NOT NULL,
     user_id BIGSERIAL REFERENCES app_user(id),
+    notes TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

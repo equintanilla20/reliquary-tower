@@ -40,6 +40,7 @@ type Deck {
     createdAt: String!
     updatedAt: String!
     cards: [DeckCard]
+    notes: String
 }
 
 type DeckCard {
@@ -63,6 +64,7 @@ input CardFilter {
 type Query {
     allUsers: [User]
     allDecks: [Deck]
+    allDecksForUser(username: String!): [Deck]
     allCards(page: Int!, size: Int!): [Card]
     searchCards(filter: CardFilter!, page: Int!, size: Int!): [Card]
     searchCardsByName(cardName: String!): [Card]
@@ -81,6 +83,8 @@ type Query {
 # MUTATIONS
 type Mutation {
     createDeck(deckName: String!, username: String!): Deck!
-    addCardToDeck(deckId: ID!, cardId: ID!, quantity: Int!): Deck!
-    # removeCardFromDeck(deckId: ID!, cardId: ID!): Deck!
+    deleteDeck(deckId: ID!, username: String!): Boolean!
+    updateDeck(deckId: ID!, deckName: String!, username: String!): Deck!
+    addCardToDeck(deckId: ID!, cardId: ID!, quantity: Int!, username: String!): Deck!
+    removeCardFromDeck(deckId: ID!, cardId: ID!, quantity: Int!, username: String!): Deck!
 }

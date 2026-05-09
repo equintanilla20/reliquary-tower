@@ -45,7 +45,7 @@ public class CardServiceTest {
         assertEquals("Heartfire Hero", results.get(0).getCardName());
 
         verify(cardRepository, times(1)).findByCardNameContainingIgnoreCase(eq("Heartfire Hero"), any(Pageable.class));
-        System.out.println("1. Test passed: Card search by name returned expected results.");
+        System.out.println("Test passed: Card search by name returned expected results.");
     }
 
     @Test
@@ -72,7 +72,7 @@ public class CardServiceTest {
         assertEquals(2, results.size(), "Should have filtered out the duplicate printing");
         assertEquals("Abhorrent Oculus", results.get(0).getCardName());
         assertEquals("Ajani, Caller of the Pride", results.get(1).getCardName());
-        System.out.println("2. Test passed: Duplicate card names were filtered out successfully.");
+        System.out.println("Test passed: Duplicate card names were filtered out successfully.");
     }
 
     @Test
@@ -84,6 +84,6 @@ public class CardServiceTest {
         List<Card> results = cardService.searchCardsAdvanced(filter, 0, 10);
 
         assertEquals(0, results.size());
-        System.out.println("3. Test passed: Empty list returned when no matches found.");
+        System.out.println("Test passed: Empty list returned when no matches found.");
     }
 }
