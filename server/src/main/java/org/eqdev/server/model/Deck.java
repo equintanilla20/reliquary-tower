@@ -51,6 +51,8 @@ public class Deck {
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public String getNotes() { return notes; }
+    public List<DeckCard> getDeckCards() { return cards; }
+
 
     // Setters
     public void setDeckId(Long deckId) { this.deckId = deckId; }
@@ -59,4 +61,5 @@ public class Deck {
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
     public void setNotes(String notes) { this.notes = notes; }
+    public void setDeckCards(List<DeckCard> cards) { this.cards = cards; }
 }

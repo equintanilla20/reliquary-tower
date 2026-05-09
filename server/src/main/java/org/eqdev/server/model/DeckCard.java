@@ -1,16 +1,10 @@
 package org.eqdev.server.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Table(name = "DeckCard")
+@Table(name = "deck_card") // Snake_case is standard for Postgres
 public class DeckCard {
 
     @EmbeddedId
@@ -28,4 +22,36 @@ public class DeckCard {
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
+
+    public DeckCard() {}
+
+    public DeckCard(Deck deck, Card card, Integer quantity) {
+        this.deck = deck;
+        this.card = card;
+        this.quantity = quantity;
+        this.id = new DeckCardId(deck.getDeckId(), card.getCardId());
+    }
+
+    public DeckCardId getId() { return id; }
+    public Deck getDeck() { return deck; }
+    public Card getCard() { return card; }
+    public Integer getQuantity() { return quantity; }
+
+    public void setId(DeckCardId id) { this.id = id; }
+    public void setDeck(Deck deck) { this.deck = deck; }
+    public void setCard(Card card) { this.card = card; }
+    public void setQuantity(Integer quantity) { this.quantity = quantity; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DeckCard deckCard = (DeckCard) o;
+        return Objects.equals(id, deckCard.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
