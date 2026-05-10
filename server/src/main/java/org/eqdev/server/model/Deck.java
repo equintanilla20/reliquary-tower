@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eqdev.server.exception.UserNotFoundException;
+import org.eqdev.server.repository.AppUserRepository;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +22,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Deck")
 public class Deck {
+
+    AppUserRepository appUserRepository;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +62,11 @@ public class Deck {
     // Setters
     public void setDeckId(Long deckId) { this.deckId = deckId; }
     public void setDeckName(String deckName) { this.deckName = deckName; }
-    public void setUser(AppUser user) { this.user = user; }
+    public void setUser(String username) { 
+        AppUser newUser = appUserRepository.findByUsername(username)
+            .orElseThrow(() -> new UserNotFoundException("User not found"));
+        this.user = newUser; 
+    }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
     public void setNotes(String notes) { this.notes = notes; }

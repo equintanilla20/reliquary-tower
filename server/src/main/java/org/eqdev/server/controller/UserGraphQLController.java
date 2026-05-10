@@ -1,5 +1,6 @@
 package org.eqdev.server.controller;
 
+import org.eqdev.server.exception.UserNotFoundException;
 import org.eqdev.server.model.AppUser;
 import org.eqdev.server.repository.AppUserRepository;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -21,11 +22,15 @@ public class UserGraphQLController {
 
     @QueryMapping
     public AppUser userByUsername(String username) {
-        return appUserRepository.findByUsername(username);
+        AppUser user = appUserRepository.findByUsername(username)
+            .orElseThrow(() -> new UserNotFoundException("User not found"));
+        return user;
     }
 
     @QueryMapping
     public AppUser userByEmail(String email) {
-        return appUserRepository.findByEmail(email);
+        AppUser user = appUserRepository.findByEmail(email)
+            .orElseThrow(() -> new UserNotFoundException("User not found"));
+        return user;
     }
 }

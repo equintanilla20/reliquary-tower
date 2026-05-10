@@ -19,12 +19,10 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class DeckService {
     private final DeckRepository deckRepository;
-    private final AppUserRepository appUserRepository;
     private final CardRepository cardRepository;
 
     public DeckService(DeckRepository deckRepository, AppUserRepository appUserRepository, CardRepository cardRepository) {
         this.deckRepository = deckRepository;
-        this.appUserRepository = appUserRepository;
         this.cardRepository = cardRepository;
     }
 
@@ -39,7 +37,7 @@ public class DeckService {
     public Deck createDeck(String deckName, String username) {
         Deck deck = new Deck();
         deck.setDeckName(deckName);
-        deck.setUser(appUserRepository.findByUsername(username));
+        deck.setUser(username);
         return deckRepository.save(deck);
     }
 
