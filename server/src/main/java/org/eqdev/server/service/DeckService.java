@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.eqdev.server.model.Deck;
 import org.eqdev.server.model.DeckCard;
 import org.eqdev.server.model.DeckCardId;
+import org.eqdev.server.exception.UserNotFoundException;
+import org.eqdev.server.model.AppUser;
 import org.eqdev.server.model.Card;
 import org.eqdev.server.repository.AppUserRepository;
 import org.eqdev.server.repository.CardRepository;
@@ -20,10 +22,13 @@ import jakarta.transaction.Transactional;
 public class DeckService {
     private final DeckRepository deckRepository;
     private final CardRepository cardRepository;
+    private final AppUserRepository appUserRepository;
+
 
     public DeckService(DeckRepository deckRepository, AppUserRepository appUserRepository, CardRepository cardRepository) {
         this.deckRepository = deckRepository;
         this.cardRepository = cardRepository;
+        this.appUserRepository = appUserRepository;
     }
 
     public List<Deck> allDecks() {
@@ -36,8 +41,10 @@ public class DeckService {
 
     public Deck createDeck(String deckName, String username) {
         Deck deck = new Deck();
+        AppUser user = appUserRepository.findByUsername(username)
+            .orElseThrow(() -> new UserNotFoundException("User not found"));
         deck.setDeckName(deckName);
-        deck.setUser(username);
+        deck.setUser(user);
         return deckRepository.save(deck);
     }
 

@@ -40,7 +40,7 @@ class DeckServiceTest {
         testDeck = new Deck();
         testDeck.setDeckId(1L);
         testDeck.setDeckName("Sultai Midrange");
-        testDeck.setUser(testUser.getUsername());
+        testDeck.setUser(testUser);
         testDeck.setDeckCards(new ArrayList<>());
 
         testCard = new Card();
