@@ -87,4 +87,5 @@ type Mutation {
     updateDeck(deckId: ID!, deckName: String!, username: String!): Deck!
     addCardToDeck(deckId: ID!, cardId: ID!, quantity: Int!, username: String!): Deck!
     removeCardFromDeck(deckId: ID!, cardId: ID!, quantity: Int!, username: String!): Deck!
+    registerUser(username: String!, email: String!, password: String!): User!
 }
