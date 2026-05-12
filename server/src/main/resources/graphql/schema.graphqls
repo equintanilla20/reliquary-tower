@@ -60,6 +60,18 @@ input CardFilter {
     status: String
 }
 
+input RegisterUserInput {
+    username: String!
+    email: String!
+    password: String!
+}
+
+input UpdateUserInput {
+    username: String
+    email: String
+    password: String
+}
+
 # QUERIES
 type Query {
     allUsers: [User]
@@ -78,6 +90,7 @@ type Query {
     userByUsername(username: String!): User
     userByEmail(email: String!): User
     deckById(deckId: ID!): Deck
+    me: User
 }
 
 # MUTATIONS
@@ -87,4 +100,13 @@ type Mutation {
     updateDeck(deckId: ID!, deckName: String!, username: String!): Deck!
     addCardToDeck(deckId: ID!, cardId: ID!, quantity: Int!, username: String!): Deck!
     removeCardFromDeck(deckId: ID!, cardId: ID!, quantity: Int!, username: String!): Deck!
+    registerUser(input: RegisterUserInput!): User!
+    deleteAccount(id: ID!): Boolean!
+    updateUserProfile(input: UpdateUserInput!): User!
+}
+
+# SCHEMA
+schema {
+    query: Query
+    mutation: Mutation
 }
