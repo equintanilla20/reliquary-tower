@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -61,7 +60,6 @@ public class Deck {
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public String getNotes() { return notes; }
     public List<DeckCard> getDeckCards() { return cards; }
-
 
     // Setters
     public void setDeckId(Long deckId) { this.deckId = deckId; }

@@ -1,5 +1,6 @@
 package org.eqdev.server.controller;
 
+import org.eqdev.server.dto.UpdateUserProfile;
 import org.eqdev.server.exception.UserNotFoundException;
 import org.eqdev.server.model.AppUser;
 import org.eqdev.server.repository.AppUserRepository;
@@ -38,7 +39,31 @@ public class AppUserGraphQLController {
 
     @MutationMapping
     public AppUser registerUser(@Argument String username, @Argument String email, @Argument String password) {
+        if (appUserRepository.existsByUsername(username)) {
+            throw new RuntimeException("Username already taken");
+        }
+        if (appUserRepository.existsByEmail(email)) {
+            throw new RuntimeException("Email already in use");
+        }
         AppUser newUser = new AppUser(username, email, password, "ROLE_USER");
         return appUserRepository.save(newUser);
+    }
+
+    @MutationMapping
+    public Boolean deleteAccount(@Argument Long id) {
+        AppUser user = appUserRepository.findById(id)
+            .orElseThrow(() -> new UserNotFoundException("User not found"));
+        appUserRepository.delete(user);
+        return true;
+    }
+
+    @MutationMapping
+    public AppUser updateUserProfile(@Argument UpdateUserProfile input) {
+        System.out.println("Updating user profile for: " + input.username());
+        AppUser user = appUserRepository.findByUsername(input.username())
+            .orElseThrow(() -> new UserNotFoundException("User not found"));
+        if (input.email() != null && !input.email().isEmpty()) { user.setEmail(input.email()); }
+        if (input.password() != null && !input.password().isEmpty()) { user.setPassword(input.password()); }
+        return appUserRepository.save(user);
     }
 }
