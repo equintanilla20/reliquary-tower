@@ -3,8 +3,6 @@ package org.eqdev.server.model;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.*;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user_inventory")
@@ -19,9 +17,7 @@ public class UserInventory {
     @JoinColumn(name = "user_id")
     private AppUser user;
 
-    // Note: If you have a Card Entity, map it here. 
-    // If you only store Scryfall IDs, just use a String field or the ID class.
-    @ManyToMany
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("cardId")
     @JoinColumn(name = "card_id", nullable = false)
     private Card card;
@@ -34,9 +30,10 @@ public class UserInventory {
 
     public UserInventory() {}
 
-    public UserInventory(AppUser user, String cardId, Integer quantity) {
-        this.id = new UserInventoryId(user.getId(), cardId);
+    public UserInventory(AppUser user, Card card, Integer quantity) {
+        this.id = new UserInventoryId(user.getId(), card.getCardId());
         this.user = user;
+        this.card = card;
         this.quantity = quantity;
     }
     

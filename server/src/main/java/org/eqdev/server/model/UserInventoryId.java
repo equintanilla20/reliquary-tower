@@ -8,22 +8,22 @@ import java.util.Objects;
 public class UserInventoryId implements Serializable {
 
     private Long userId;
-    private String cardId;
+    private Long cardId;
 
     public UserInventoryId() {}
 
-    public UserInventoryId(Long userId, String cardId) {
+    public UserInventoryId(Long userId, Long cardId) {
         this.userId = userId;
         this.cardId = cardId;
     }
 
     // Getters
     public Long getUserId() { return userId; }
-    public String getCardId() { return cardId; }
+    public Long getCardId() { return cardId; }
 
     // Setters
     public void setUserId(Long userId) { this.userId = userId; }
-    public void setCardId(String cardId) { this.cardId = cardId; }
+    public void setCardId(Long cardId) { this.cardId = cardId; }
 
     @Override
     public boolean equals(Object o) {
