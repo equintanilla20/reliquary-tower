@@ -10,6 +10,7 @@ import org.eqdev.server.model.AppUser;
 import org.eqdev.server.model.Card;
 import org.eqdev.server.model.UserInventory;
 import org.eqdev.server.model.UserInventoryId;
+import org.eqdev.server.repository.AppUserRepository;
 import org.eqdev.server.repository.CardRepository;
 import org.eqdev.server.repository.UserInventoryRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +25,9 @@ class UserInventoryServiceTest {
 
     @Mock
     private CardRepository cardRepository;
+
+    @Mock
+    private AppUserRepository userRepository;
 
     @Mock
     private UserInventoryRepository inventoryRepository;
@@ -45,6 +49,9 @@ class UserInventoryServiceTest {
         testCard.setCardName("Black Lotus");
 
         inventoryId = new UserInventoryId(1L, 100L);
+
+        lenient().when(userRepository.findById(1L)).thenReturn(Optional.of(testUser));
+        lenient().when(cardRepository.findCardByCardId(100L)).thenReturn(Optional.of(testCard));
     }
 
     @Test
@@ -59,6 +66,7 @@ class UserInventoryServiceTest {
 
         assertEquals(5, result.getQuantity(), "Quantity should be 2 + 3 = 5");
         verify(inventoryRepository, times(1)).save(existingInventory);
+        System.out.println("Test Passed: Adding to existing inventory record correctly increments quantity.");
     }
 
     @Test
@@ -73,5 +81,6 @@ class UserInventoryServiceTest {
         assertEquals(1, result.getQuantity());
         assertEquals(testCard, result.getCard());
         verify(inventoryRepository, times(1)).save(any(UserInventory.class));
+        System.out.println("Test Passed: Adding new inventory record creates entry with correct quantity.");
     }
 }
