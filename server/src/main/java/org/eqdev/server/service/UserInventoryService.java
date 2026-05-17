@@ -6,6 +6,7 @@ import org.eqdev.server.model.AppUser;
 import org.eqdev.server.model.Card;
 import org.eqdev.server.model.UserInventory;
 import org.eqdev.server.model.UserInventoryId;
+import org.eqdev.server.repository.AppUserRepository;
 import org.eqdev.server.repository.CardRepository;
 import org.eqdev.server.repository.UserInventoryRepository;
 import org.springframework.stereotype.Service;
@@ -15,25 +16,32 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class UserInventoryService {
+    private final AppUserRepository userRepository;
     private final CardRepository cardRepository;
     private final UserInventoryRepository inventoryRepository;
 
-    public UserInventoryService(CardRepository cardRepository, UserInventoryRepository inventoryRepository) {
+    public UserInventoryService(
+        AppUserRepository userRepository,
+        CardRepository cardRepository, 
+        UserInventoryRepository inventoryRepository
+    ) {
+        this.userRepository = userRepository;
         this.cardRepository = cardRepository;
         this.inventoryRepository = inventoryRepository;
     }
     
     @Transactional
-    public UserInventory addCardToInventory(AppUser user, Long cardId, Integer quantity) {
+    public UserInventory addCardToInventory(Long userId, Long cardId, Integer quantity) {
         Optional<Card> card = cardRepository.findCardByCardId(cardId);
-        UserInventoryId id = new UserInventoryId(user.getId(), cardId);
+        Optional<AppUser> user = userRepository.findById(userId);
+        UserInventoryId id = new UserInventoryId(userId, cardId);
         return inventoryRepository.findById(id)
                 .map(existing -> {
                     existing.setQuantity(existing.getQuantity() + quantity);
                     return inventoryRepository.save(existing);
                 })
                 .orElseGet(() -> {
-                    UserInventory newEntry = new UserInventory(user, card.get(), quantity);
+                    UserInventory newEntry = new UserInventory(user.get(), card.get(), quantity);
                     return inventoryRepository.save(newEntry);
                 });
     }

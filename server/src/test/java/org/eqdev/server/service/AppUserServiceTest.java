@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.Optional;
 
+import org.eqdev.server.dto.RegisterUser;
 import org.eqdev.server.exception.UserNotFoundException;
 import org.eqdev.server.model.AppUser;
 import org.eqdev.server.repository.AppUserRepository;
@@ -36,8 +37,10 @@ class AppUserServiceTest {
     void registerUser_Success_ShouldReturnSavedUser() {
         when(userRepository.existsByUsername("mtg_wizard")).thenReturn(false);
         when(userRepository.save(any(AppUser.class))).thenReturn(testUser);
+        RegisterUser input = new RegisterUser("mtg_wizard", "wizard@eqdev.org", "password123");
 
-        AppUser savedUser = userService.registerUser("mtg_wizard", "wizard@eqdev.org", "password123");
+
+        AppUser savedUser = userService.registerUser(input);
 
         assertNotNull(savedUser);
         assertEquals("mtg_wizard", savedUser.getUsername());
@@ -48,9 +51,10 @@ class AppUserServiceTest {
     @Test
     void registerUser_DuplicateUsername_ShouldThrowException() {
         when(userRepository.existsByUsername("mtg_wizard")).thenReturn(true);
+        RegisterUser input = new RegisterUser("mtg_wizard", "other@email.com", "pass");
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            userService.registerUser("mtg_wizard", "other@email.com", "pass");
+            userService.registerUser(input);
         });
 
         assertEquals("Username already taken", exception.getMessage());

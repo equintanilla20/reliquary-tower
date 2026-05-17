@@ -56,9 +56,10 @@ CREATE TABLE Deck_Card(
 );
 
 -- User Personal Collection Table
-CREATE TABLE User_Collection(
-    user_id BIGSERIAL REFERENCES app_user(id),
+CREATE TABLE User_Inventory(
+    user_id BIGSERIAL REFERENCES app_user(id) ON DELETE CASCADE,
     card_id BIGSERIAL REFERENCES Card(card_id),
     quantity INT DEFAULT 1,
+    is_foil BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (user_id, card_id)
 );

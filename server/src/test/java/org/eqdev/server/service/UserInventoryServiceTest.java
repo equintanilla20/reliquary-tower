@@ -54,8 +54,8 @@ class UserInventoryServiceTest {
         when(cardRepository.findCardByCardId(100L)).thenReturn(Optional.of(testCard));
         when(inventoryRepository.findById(inventoryId)).thenReturn(Optional.of(existingInventory));
         when(inventoryRepository.save(any(UserInventory.class))).thenAnswer(i -> i.getArguments()[0]);
-
-        UserInventory result = inventoryService.addCardToInventory(testUser, 100L, 3);
+        
+        UserInventory result = inventoryService.addCardToInventory(testUser.getId(), 100L, 3);
 
         assertEquals(5, result.getQuantity(), "Quantity should be 2 + 3 = 5");
         verify(inventoryRepository, times(1)).save(existingInventory);
@@ -67,7 +67,7 @@ class UserInventoryServiceTest {
         when(inventoryRepository.findById(inventoryId)).thenReturn(Optional.empty());
         when(inventoryRepository.save(any(UserInventory.class))).thenAnswer(i -> i.getArguments()[0]);
 
-        UserInventory result = inventoryService.addCardToInventory(testUser, 100L, 1);
+        UserInventory result = inventoryService.addCardToInventory(testUser.getId(), 100L, 1);
 
         assertNotNull(result);
         assertEquals(1, result.getQuantity());
