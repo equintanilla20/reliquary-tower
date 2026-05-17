@@ -48,6 +48,17 @@ type DeckCard {
     quantity: Int!
 }
 
+type UserInventory {
+    id: UserInventoryId
+    quantity: Int!
+    isFoil: Boolean!
+}
+
+type UserInventoryId {
+    userId: ID!
+    cardId: String!
+}
+
 input CardFilter {
     cardName: String
     cardRarity: String
@@ -103,6 +114,7 @@ type Mutation {
     registerUser(input: RegisterUserInput!): User!
     deleteAccount(id: ID!): Boolean!
     updateUserProfile(input: UpdateUserInput!): User!
+    addCardToInventory(userId: ID!, cardId: ID!, quantity: Int!): UserInventory!
 }
 
 # SCHEMA
