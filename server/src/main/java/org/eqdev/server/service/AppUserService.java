@@ -6,9 +6,10 @@ import org.eqdev.server.exception.UserNotFoundException;
 import org.eqdev.server.model.AppUser;
 import org.eqdev.server.repository.AppUserRepository;
 import org.springframework.stereotype.Service;
-
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class AppUserService {
     private final AppUserRepository userRepository;
 
