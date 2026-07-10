@@ -14,9 +14,9 @@ spring:
     show-sql: false
     properties:
       hibernate:
-        '[format_sql]': false
+        "[format_sql]": false
         type:
-          '[json_format_mapper]': jackson
+          "[json_format_mapper]": jackson
   graphql:
     graphiql:
       enabled: true
@@ -24,3 +24,9 @@ spring:
     schema:
       introspection:
         enabled: true
+logging:
+  level:
+    root: INFO                             # Default fallback for libraries
+    "[org.eqdev.server]": DEBUG                # Show your detailed app logs
+    "[org.springframework.orm.jpa]": WARN      # Hide noisy JPA lifecycle details
+    "[org.hibernate.SQL]": WARN                # Don't flood the console with raw SQL queries unless debugging DB issues
